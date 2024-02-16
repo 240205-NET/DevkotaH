@@ -6,8 +6,11 @@ namespace Program
     public class RegularMembership : Person
     {
         //fields
-        public int memberId { get; set; }
+        public int memberId;
+        private static int idSeed=1;
         private XmlSerializer serializer = new XmlSerializer(typeof(RegularMembership));
+
+
 
         //constructors 
         public RegularMembership()

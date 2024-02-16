@@ -23,44 +23,65 @@ namespace Program
         {
             string path = @".\GymMembership.txt";
             RegularMembership regularMember;
-            Members members = new Members();
+            MembershipManager members = new MembershipManager();
             Console.WriteLine("Please Select from the following options.");
-            Console.WriteLine("1: Write To File.");
-            Console.WriteLine("2: Read From File.");
-            Console.WriteLine("3: Serialize Xml .");
-            Console.WriteLine("4: Deserialize Xml");
-            Console.WriteLine("5: Exit");
-            Console.Write("Enter your Option: ");
+                Console.WriteLine("1: Add Membership.");
+                Console.WriteLine("2: View Membership.");
+                Console.WriteLine("3: View Membership by Id .");
+                Console.WriteLine("4: Write To File.");
+                Console.WriteLine("5: Read From File.");
+                Console.WriteLine("6: Serialize Xml .");
+                Console.WriteLine("7: Deserialize Xml");
+                Console.WriteLine("8: Exit");
+                Console.Write("Enter your Option: ");;
 
             string? option = Console.ReadLine();
-            while (option != "5")
+            while (option != "8")
             {
                 switch (option)
                 {
                     case "1":
                         Console.WriteLine("\n");
                         Console.WriteLine("==========================");
-                        regularMember = members.AddRegularMembership();
-                        WriteToFile(regularMember, path);
+                        members.AddRegularMembership();
                         break;
                     case "2":
                         Console.WriteLine("\n");
                         Console.WriteLine("==========================");
-                        ReadFromFile(path);
+                        Console.WriteLine(members.ViewRegularMembership());
                         break;
                     case "3":
+                        Console.WriteLine("\n");
+                        Console.WriteLine("==========================");
+                        Console.WriteLine("Enter the id you want to view");
+                        int id = int.Parse(Console.ReadLine());
+                        members.ViewMembershipById(id);
+                        break;
+                    case "4":
+                        Console.WriteLine("\n");
+                        Console.WriteLine("==========================");
+                        string memberInfo = members.ViewRegularMembership();
+                        // regularMember = members.AddRegularMembership();
+                        WriteToFile(memberInfo, path);
+                        break;
+                    case "5":
+                        Console.WriteLine("\n");
+                        Console.WriteLine("==========================");
+                        ReadFromFile(path);
+                        break;
+                    case "6":
                         Console.WriteLine("\n");
                         Console.WriteLine("==========================");
                         regularMember = members.AddRegularMembership();
                         Serialize(regularMember, path);
                         break;
-                    case "4":
+                    case "7":
                         Console.WriteLine("\n");
                         Console.WriteLine("==========================");
                         regularMember = DeserializeXML(path);
                         Console.WriteLine(regularMember.ToString());
                         break;
-                    case "5":
+                    case "8":
                         Console.WriteLine("You have have successfully exited the program");
                         break;
 
@@ -72,11 +93,14 @@ namespace Program
                 Console.WriteLine("\n");
                 Console.WriteLine("==========================");
                 Console.WriteLine("Please Select from the following options.");
-                Console.WriteLine("1: Write To File.");
-                Console.WriteLine("2: Read From File.");
-                Console.WriteLine("3: Serialize Xml .");
-                Console.WriteLine("4: Deserialize Xml");
-                Console.WriteLine("5: Exit");
+                Console.WriteLine("1: Add Membership.");
+                Console.WriteLine("2: View Membership.");
+                Console.WriteLine("3: View Membership by Id .");
+                Console.WriteLine("4: Write To File.");
+                Console.WriteLine("5: Read From File.");
+                Console.WriteLine("6: Serialize Xml .");
+                Console.WriteLine("7: Deserialize Xml");
+                Console.WriteLine("8: Exit");
                 Console.Write("Enter your Option: ");
                 option = Console.ReadLine();
             }
@@ -84,10 +108,10 @@ namespace Program
 
         }
 
-        static void WriteToFile(RegularMembership regularMember, string path)
+        static void WriteToFile(string memberInfo, string path)
         {
             Console.WriteLine("Writing to file....");
-            string write = regularMember.ToString();
+            string write = memberInfo;
 
             if (File.Exists(path))
             {

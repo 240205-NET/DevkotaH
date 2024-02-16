@@ -10,17 +10,26 @@ namespace Program
 
         //constructors 
         public PremiumMembership()
-        {}
+        { }
 
         public PremiumMembership(string name, string email, int phoneNo, string gender)
         {
-            this.memberId = idSeed;
+            this.memberId = base.idSeed;
             this.name = name;
             this.email = email;
             this.phoneNo = phoneNo;
             this.gender = gender;
-            this.isPremimum=true;
-            idSeed++;
+            this.isPremimum = true;
+            base.idSeed++;
+        }
+        public PremiumMembership(int? memberId, string? name, string? email, int? phoneNo, string? gender)
+        {
+            this.memberId = memberId;
+            this.name = name;
+            this.email = email;
+            this.phoneNo = phoneNo;
+            this.gender = gender;
+            this.isPremimum = true;
         }
 
         //methods
